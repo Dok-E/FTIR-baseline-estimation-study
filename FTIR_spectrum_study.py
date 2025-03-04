@@ -57,6 +57,12 @@ bkg_21, params_21 = baseline_fitter.iasls(y, lam=1e7, lam_1=1e-5, p=0.1)
 bkg_3, params_3 = baseline_fitter.mor(y, half_window=50)
 bkg_4, params_4 = baseline_fitter.snip(    y, max_half_window=50, decreasing=True, smooth_half_window=2)
 
+sp_modpoly = sp - bkg_1
+sp_asls = sp - bkg_2
+sp_iasls = sp - bkg_21
+sp_mor = sp - bkg_3
+sp_snip = sp - bkg_4
+
 
 plt.plot(bkg_waves, bkg_data,label='Background Spectrum', linestyle='--', color='b')
 plt.plot(sp_waves, sp_data,label='Pollen Sample Spectrum',linestyle='-', color='g')
@@ -71,3 +77,17 @@ plt.plot(x, bkg_21, '--', label='iasls')
 
 plt.legend()
 plt.show()
+
+
+plt.plot(bkg_waves, bkg_data,label='Background Spectrum', linestyle='--', color='b')
+plt.plot(sp_waves, sp_data,label='Pollen Sample Spectrum',linestyle='-', color='g')
+plt.plot(sp_waves, sp ,label='Background substracted',linestyle='-', color='r')
+plt.plot(x, sp_modpoly, '--',label='Sample modpoly corrected')
+plt.plot(x, sp_asls, '--',label='Sample asls corrected')
+plt.plot(x, sp_iasls, '--',label='Sample iasls corrected')
+plt.plot(x, sp_mor,'--', label='Sample mor corrected')
+plt.plot(x, sp_snip,'--', label='Sample snip corrected')
+
+plt.legend()
+plt.show()
+
